@@ -1,0 +1,33 @@
+= DevFest 2017 - Jenkins Lab
+
+. Descargar Jenkins:
+* WAR: `wget http://mirrors.jenkins.io/war/2.91/jenkins.war`
+* Docker Image: `docker pull jenkinsci/jenkins:2.91`
+. Iniciar Jenkins:
+* WAR: `java -jar jenkins.war`
+* Docker Image: `docker run jenkinsci/jenkins:2.91`
+. Ingresar la contraseña que se muestra en el log
++
+```
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+6d9b8b66deca44f3911c304080b0a253
+
+This may also be found at: /Users/eddumelendez/Downloads/devfest2017/.jenkins/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+```
+. Instalar los siguientes plugins `Manage Jenkins > Manage Plugins > Available`:
+* Blue Ocean
+* Pipeline: Model API
++
+image::https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif[]
+
+. Reiniciar Jenkins
