@@ -1,5 +1,7 @@
 = DevFest 2017 - Jenkins Lab
 
+== Setup
+
 . Descargar Jenkins:
 * WAR: `wget http://mirrors.jenkins.io/war/2.91/jenkins.war`
 * Docker Image: `docker pull jenkinsci/jenkins:2.91`
@@ -28,7 +30,15 @@ This may also be found at: /Users/eddumelendez/Downloads/devfest2017/.jenkins/se
 . Instalar los siguientes plugins `Manage Jenkins > Manage Plugins > Available`:
 * Blue Ocean
 * Pipeline: Model API
+* Slack Notification Plugin
 +
 image::https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif[]
 
 . Reiniciar Jenkins
+
+== Mi primer pipeline
+
+. `New item > Pipeline`
+. Ingresar nombre. Por ejemplo: `devfest2017`
+. Clic en `OK`
+. Ir a la sección `Pipeline`
