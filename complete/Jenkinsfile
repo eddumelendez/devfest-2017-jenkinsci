@@ -1,0 +1,69 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+
+    parameters {
+        booleanParam(defaultValue: false, description: 'Desplegar en producción?', name: 'RELEASE')
+    }
+
+    environment {
+        SLACK_TOKEN = ''
+        SLACK_TEAM = ''
+        SLACK_CHANNEL = ''
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/jenkinsperu/sonarqube-demo.git', branch: 'master'
+            }
+        }
+        stage('Tests') {
+            steps {
+                sh './gradlew clean test --no-daemon'
+            }
+            post {
+                always {
+                    junit 'build/test-results/test/*.xml'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                sh './gradlew build --no-daemon'
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'build/libs/*.jar', onlyIfSuccessful: true
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    return params.RELEASE
+                }
+            }
+            steps {
+                echo "Build ${env.BUILD_NUMBER} is going to be released."
+            }
+        }
+    }
+
+    post {
+        failure {
+            slack('danger', 'This is not fine')
+        }
+        success {
+            slack('good', 'This is fine')
+        }
+        unstable {
+            slack('warning', 'This is unstable')
+        }
+    }
+}
+
+def slack(color, message) {
+    slackSend channel: "${env.SLACK_CHANNEL}", color: color, message: message, teamDomain: "${env.SLACK_TEAM}", token: "${env.SLACK_TOKEN}"
+}

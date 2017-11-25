@@ -42,3 +42,5 @@ image::https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif[]
 . Ingresar nombre. Por ejemplo: `devfest2017`
 . Clic en `OK`
 . Ir a la sección `Pipeline`
+
+El ejemplo completo se encuentra en `complete/Jenkinsfile`. No olvidar configurar las variables `SLACK_TOKEN`, `SLACK_TEAM` y `SLACK_CHANNEL`.
