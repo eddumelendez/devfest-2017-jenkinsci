@@ -6,6 +6,7 @@
 . Iniciar Jenkins:
 * WAR: `java -jar jenkins.war`
 * Docker Image: `docker run jenkinsci/jenkins:2.91`
+. Ingresar a `http://localhost:8080/`
 . Ingresar la contraseña que se muestra en el log
 +
 ```
